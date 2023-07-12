@@ -17,7 +17,7 @@ import java.util.concurrent.CountDownLatch;
  */
 public class WebClientIT {
 
-    public static final String BASE_URL = "http://localhost:8080";
+    public static final String BASE_URL = "http://localhost:28080";
 
     WebClient webClient;
 
@@ -39,8 +39,8 @@ public class WebClientIT {
                 .retrieve().bodyToMono(BeerPagedList.class);
 
 
-//        BeerPagedList pagedList = beerPagedListMono.block();
-//        pagedList.getContent().forEach(beerDto -> System.out.println(beerDto.toString()));
+        BeerPagedList pagedList = beerPagedListMono.block();
+        pagedList.getContent().forEach(beerDto -> System.out.println(beerDto.toString()));
         beerPagedListMono.publishOn(Schedulers.parallel()).subscribe(beerPagedList -> {
 
             beerPagedList.getContent().forEach(beerDto -> System.out.println(beerDto.toString()));
